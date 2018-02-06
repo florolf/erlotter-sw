@@ -1,0 +1,11 @@
+[Unit]
+Description = LED panel management frontend
+StartLimitIntervalSec=0
+
+[Service]
+ExecStart = /opt/erlotter/mgmt/ui/server.sh
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy = multi-user.target

@@ -1,0 +1,39 @@
+%layout 'default';
+
+<div class="row">
+	<div class="col-8">
+		<table class="table">
+			<thead>
+				<th>Lamp name</th>
+				<th>Status</th>
+				<th>Operations</th>
+			</thead>
+			<tbody>
+			<tr>
+				<td colspan="2"></td>
+				<td>
+					<a class="btn btn-primary btn-sm" href="/edit/all" role="button">Edit all</a>
+				</td>
+			</tr>
+			% for my $lamp (@$lamps) {
+				% my $synced = (($lamp->{updated} // 0) <= ($lamp->{last_sync} // 0));
+				% if (! $synced) {
+				<tr class="table-info">
+				% } else {
+				<tr>
+				% }
+					<td> <%= $lamp->{name} %></td>
+					<td>
+						<%= $synced ? "up to date" : "not synchronized" %>
+					</td>
+					<td>
+						<a class="btn btn-primary btn-sm" href="/edit/<%= $lamp->{id} %>" role="button">Edit</a>
+						<a class="btn btn-primary btn-sm" href="/log/<%= $lamp->{id} %>" role="button">Log</a>
+					</td>
+				</tr>
+			% }
+			</tbody>
+		</table>
+	</ul>
+	</div>
+</div>

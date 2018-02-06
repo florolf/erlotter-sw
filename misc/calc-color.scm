@@ -1,0 +1,41 @@
+(use-modules (ice-9 slib))
+
+(require 'daylight)
+
+(define lat 52.362222)
+
+(define (sun-temperature theta-s)
+  (let* ((turbidity 1)
+         (chroma (sunlight-chromaticity turbidity theta-s))
+         (n (/ (- (car chroma) 0.3320) (- (cadr chroma) 0.1858))))
+    (+ (* -449 (expt n 3))
+       (* 3625 (expt n 2))
+       (* -6823.3 n)
+       5520.33)))
+
+(define (clamp x min max)
+  (cond ((> x max) max)
+        ((< x min) min)
+        (else x)))
+
+(define (print-color-by-angle)
+  (do ((theta-s 0 (+ theta-s 1)))
+    ((= theta-s 90) #t)
+    (display theta-s)
+    (display " ")
+    (display (clamp (sun-temperature theta-s) 3000 6000))
+    (newline)))
+
+(define (print-color-by-time latitude date)
+  (do ((hour 0 (+ hour 0.1)))
+    ((>= hour 23) #t)
+    (let* ((shour (solar-hour date hour))
+           (declination (solar-declination date))
+           (polar (solar-polar declination latitude shour))
+           (theta-s (clamp (car polar) 0 90)))
+      (display hour)
+      (display " ")
+      (display (clamp (sun-temperature theta-s) 3000 6000))
+      (newline))))
+
+(print-color-by-time lat (string->number (cadr (command-line))))

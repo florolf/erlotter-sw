@@ -1,0 +1,1 @@
+CREATE TABLE devices(id INTEGER PRIMARY KEY, uid TEXT);

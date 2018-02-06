@@ -1,0 +1,11 @@
+[Unit]
+Description = CAN configuration
+StartLimitIntervalSec=0
+
+[Service]
+ExecStart = /opt/erlotter/watch-can.sh
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy = multi-user.target

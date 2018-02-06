@@ -1,0 +1,11 @@
+[Unit]
+Description = LED panel time service
+StartLimitIntervalSec=0
+
+[Service]
+ExecStart = /opt/erlotter/mgmt/daemons/launch.sh timesyncd.py can0
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy = multi-user.target

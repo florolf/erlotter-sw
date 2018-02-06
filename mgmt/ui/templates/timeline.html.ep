@@ -1,0 +1,32 @@
+%layout 'default';
+
+<div class="row">
+	<div class="col-8">
+		<div id="plot" data-lamp="<%= $lamp %>"></div>
+
+		<div class="card">
+			<div class="card-body">
+				<button type="button" class="btn btn-primary" id="save">Save</button>
+				<button type="button" class="btn btn-primary" id="reset">Undo changes</button>
+				<button type="button" class="btn btn-primary" id="clear">Load empty</button>
+				<button type="button" class="btn btn-primary" id="default">Load default</button>
+			</div>
+		</div>
+	</div>
+	<div class="col-4">
+		<p>Here, you can change the progression of the color temperature over time for a particular lamp.</p>
+
+		<p>Drag points to adjust their position. Double click on a point to delete it, double click somewhere else to create a new point</p>
+
+		<p><em>Save</em> stores the new timeline for the lamp.</p>
+		<p><em>Undo changes</em> loads the currently applied setting and discards any unsaved changes.<p>
+		<p><em>Load empty</em> removes all points from the timeline.</p>
+		<p><em>Load default</em> loads a timeline simulating the typical progression of the color temperature of sunlight.</p>
+
+		<p><b>Note:</b> the timeline is only saved if you press <em>Save</em>. All other changes will be discarded when you leave this page</p>
+	</div>
+</div>
+
+% content_for javascript => begin
+<script src="/js/main.js"></script>
+% end

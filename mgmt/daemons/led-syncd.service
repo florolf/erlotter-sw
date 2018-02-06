@@ -1,0 +1,11 @@
+[Unit]
+Description = LED panel synchronization service
+StartLimitIntervalSec=0
+
+[Service]
+ExecStart = /opt/erlotter/mgmt/daemons/launch.sh syncd.py can0 /opt/erlotter/db
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy = multi-user.target

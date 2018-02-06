@@ -1,0 +1,21 @@
+CREATE TABLE lamps (
+	id INTEGER PRIMARY KEY,
+	name TEXT NOT NULL,
+	bus TEXT NOT NULL,
+
+	updated INTEGER,
+	last_sync INTEGER
+);
+
+CREATE TABLE timelines (
+	lamp INTEGER NOT NULL REFERENCES lamps(id) ON DELETE CASCADE,
+	timestamp INTEGER NOT NULL,
+	color INTEGER NOT NULL
+);
+
+CREATE TABLE logs (
+	time INTEGER NOT NULL,
+	lamp INTEGER,
+
+	message TEXT
+);

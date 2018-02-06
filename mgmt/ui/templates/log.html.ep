@@ -1,0 +1,35 @@
+%layout 'default';
+
+<div class="row">
+	<div class="col-8">
+		<table class="table">
+			<thead>
+				<th>Timestamp</th>
+				<th>Lamp</th>
+				<th>Message</th>
+			</thead>
+			<tbody>
+			% for my $log (@$logs) {
+				<tr>
+					<th scope="row"><%= unix2ts($log->{time}) %></th>
+					<td><%= $log->{name} %></td>
+					<td><%= $log->{message} %></td>
+				</tr>
+			% }
+			</tbody>
+		</table>
+
+		% if ($prev >= 0) {
+		<a class="btn btn-primary" href="/log/<%= $id %>/<%= $prev %>" role="button">Prev</a>
+		% } else {
+		<a href="#" class="btn btn-primary disabled" role="button" aria-disabled="true">Prev</a>
+		% }
+
+		% if ($next >= 0) {
+		<a class="btn btn-primary" href="/log/<%= $id %>/<%= $next %>" role="button">Next</a>
+		% } else {
+		<a href="#" class="btn btn-primary disabled" role="button" aria-disabled="true">Next</a>
+		% }
+	</ul>
+	</div>
+</div>
